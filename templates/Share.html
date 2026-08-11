@@ -4,7 +4,11 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Share File | SecureCloud</title>
 
@@ -15,7 +19,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
 
         body {
             min-height: 100vh;
@@ -44,7 +47,6 @@
                 #080d18;
         }
 
-
         .container {
             width: 100%;
             max-width: 500px;
@@ -63,7 +65,6 @@
             animation: appear 0.4s ease;
         }
 
-
         @keyframes appear {
 
             from {
@@ -75,16 +76,12 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-
         }
-
 
         .logo {
             text-align: center;
-
             margin-bottom: 28px;
         }
-
 
         .logo-icon {
             width: 58px;
@@ -108,25 +105,20 @@
                 );
 
             box-shadow:
-                0 10px 30px rgba(37, 99, 235, 0.25);
+                0 10px 30px
+                rgba(37, 99, 235, 0.25);
         }
-
 
         .logo h1 {
             color: white;
-
             font-size: 22px;
-
             margin-bottom: 5px;
         }
 
-
         .logo p {
             color: #64748b;
-
             font-size: 12px;
         }
-
 
         .file-box {
             display: flex;
@@ -145,7 +137,6 @@
             margin-bottom: 20px;
         }
 
-
         .file-icon {
             width: 40px;
             height: 40px;
@@ -163,11 +154,9 @@
             font-size: 18px;
         }
 
-
         .file-info {
             min-width: 0;
         }
-
 
         .file-info strong {
             display: block;
@@ -183,7 +172,6 @@
             text-overflow: ellipsis;
         }
 
-
         .file-info span {
             display: block;
 
@@ -194,7 +182,6 @@
             margin-top: 4px;
         }
 
-
         .share-title {
             color: white;
 
@@ -202,7 +189,6 @@
 
             margin-bottom: 8px;
         }
-
 
         .share-description {
             color: #64748b;
@@ -214,7 +200,6 @@
             margin-bottom: 14px;
         }
 
-
         .link-box {
             display: flex;
 
@@ -222,7 +207,6 @@
 
             margin-bottom: 12px;
         }
-
 
         .link-box input {
             flex: 1;
@@ -243,7 +227,6 @@
 
             outline: none;
         }
-
 
         .copy-btn {
             border: none;
@@ -270,14 +253,13 @@
             transition: 0.2s;
         }
 
-
         .copy-btn:hover {
             transform: translateY(-1px);
 
             box-shadow:
-                0 7px 18px rgba(37, 99, 235, 0.25);
+                0 7px 18px
+                rgba(37, 99, 235, 0.25);
         }
-
 
         .security {
             display: flex;
@@ -301,7 +283,6 @@
             margin-bottom: 20px;
         }
 
-
         .security-dot {
             width: 6px;
             height: 6px;
@@ -311,16 +292,15 @@
             background: #22c55e;
 
             box-shadow:
-                0 0 7px rgba(34, 197, 94, 0.6);
+                0 0 7px
+                rgba(34, 197, 94, 0.6);
         }
-
 
         .buttons {
             display: flex;
 
             gap: 9px;
         }
-
 
         .button {
             flex: 1;
@@ -338,7 +318,6 @@
             transition: 0.2s;
         }
 
-
         .dashboard-btn {
             color: #94a3b8;
 
@@ -347,13 +326,11 @@
             border: 1px solid #263449;
         }
 
-
         .dashboard-btn:hover {
             color: white;
 
             background: #162338;
         }
-
 
         .files-btn {
             color: #60a5fa;
@@ -363,11 +340,9 @@
             border: 1px solid #1e3a8a;
         }
 
-
         .files-btn:hover {
             background: #172f62;
         }
-
 
         .message {
             text-align: center;
@@ -381,23 +356,19 @@
             display: none;
         }
 
-
         @media (max-width: 500px) {
 
             .container {
                 padding: 25px 20px;
             }
 
-
             .link-box {
                 flex-direction: column;
             }
 
-
             .copy-btn {
                 padding: 10px;
             }
-
 
             .buttons {
                 flex-direction: column;
@@ -409,163 +380,174 @@
 
 </head>
 
-
 <body>
 
+    <div class="container">
 
-<div class="container">
+        <div class="logo">
 
+            <div class="logo-icon">
+                🔗
+            </div>
 
-    <div class="logo">
+            <h1>
+                Share File
+            </h1>
 
-        <div class="logo-icon">
-            🔗
-        </div>
-
-        <h1>
-            Share File
-        </h1>
-
-        <p>
-            SecureCloud file sharing
-        </p>
-
-    </div>
-
-
-    <div class="file-box">
-
-
-        <div class="file-icon">
-            📄
-        </div>
-
-
-        <div class="file-info">
-
-            <strong>
-                {{ file.filename }}
-            </strong>
-
-            <span>
-                🔒 Encrypted file
-            </span>
+            <p>
+                SecureCloud file sharing
+            </p>
 
         </div>
 
+        <div class="file-box">
 
-    </div>
+            <div class="file-icon">
+                📄
+            </div>
 
+            <div class="file-info">
 
-    <div class="share-title">
-        Anyone with the link
-    </div>
+                <strong>
+                    {{ file.filename }}
+                </strong>
 
+                <span>
+                    🔒 Encrypted file
+                </span>
 
-    <div class="share-description">
+            </div>
 
-        Anyone who has this link can download
-        the file. Your AWS S3 storage remains
-        private and protected.
+        </div>
 
-    </div>
+        <div class="share-title">
+            Anyone with the link
+        </div>
 
+        <div class="share-description">
 
-    <div class="link-box">
+            Anyone who has this link can download
+            the file. Your AWS S3 storage remains
+            private and protected.
 
+        </div>
 
-        <input
-            type="text"
-            id="shareLink"
-            value="{{ share_link }}"
-            readonly
+        <div class="link-box">
+
+            <input
+                type="text"
+                id="shareLink"
+                value="{{ share_link }}"
+                readonly
+            >
+
+            <button
+                type="button"
+                class="copy-btn"
+                onclick="copyLink()"
+            >
+                Copy Link
+            </button>
+
+        </div>
+
+        <div
+            class="message"
+            id="copyMessage"
         >
+            ✓ Link copied successfully
+        </div>
 
+        <div class="security">
 
-        <button
-            class="copy-btn"
-            onclick="copyLink()"
-        >
-            Copy Link
-        </button>
+            <div class="security-dot"></div>
 
+            Secure share link generated
 
-    </div>
+        </div>
 
+        <div class="buttons">
 
-    <div
-        class="message"
-        id="copyMessage"
-    >
-        ✓ Link copied successfully
-    </div>
+            <a
+                href="/files"
+                class="button dashboard-btn"
+            >
+                ← My Files
+            </a>
 
+            <a
+                href="/dashboard"
+                class="button files-btn"
+            >
+                Dashboard
+            </a>
 
-    <div class="security">
-
-        <div class="security-dot"></div>
-
-        Secure share link generated
-
-    </div>
-
-
-    <div class="buttons">
-
-
-        <a
-            href="/files"
-            class="button dashboard-btn"
-        >
-            ← My Files
-        </a>
-
-
-        <a
-            href="/dashboard"
-            class="button files-btn"
-        >
-            Dashboard
-        </a>
-
+        </div>
 
     </div>
 
+    <script>
 
-</div>
+        function copyLink() {
+
+            const input =
+                document.getElementById(
+                    "shareLink"
+                );
+
+            const message =
+                document.getElementById(
+                    "copyMessage"
+                );
+
+            if (
+                navigator.clipboard &&
+                window.isSecureContext
+            ) {
+
+                navigator.clipboard.writeText(
+                    input.value
+                ).then(function () {
+
+                    showMessage();
+
+                });
+
+                return;
+            }
+
+            input.select();
+
+            input.setSelectionRange(
+                0,
+                input.value.length
+            );
+
+            document.execCommand(
+                "copy"
+            );
+
+            showMessage();
+        }
 
 
-<script>
+        function showMessage() {
 
-    function copyLink() {
+            const message =
+                document.getElementById(
+                    "copyMessage"
+                );
 
-        const input = document.getElementById(
-            "shareLink"
-        );
+            message.style.display = "block";
 
-        const message = document.getElementById(
-            "copyMessage"
-        );
+            setTimeout(function () {
 
+                message.style.display = "none";
 
-        navigator.clipboard.writeText(
-            input.value
-        );
+            }, 2500);
+        }
 
-
-        message.style.display = "block";
-
-
-        setTimeout(function() {
-
-            message.style.display = "none";
-
-        }, 2500);
-
-    }
-
-</script>
-
+    </script>
 
 </body>
 

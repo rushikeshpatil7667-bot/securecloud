@@ -4,7 +4,11 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>My Files | SecureCloud</title>
 
@@ -23,9 +27,6 @@
             min-height: 100vh;
         }
 
-
-        /* Sidebar */
-
         .sidebar {
             position: fixed;
             left: 0;
@@ -43,18 +44,14 @@
             flex-direction: column;
         }
 
-
         .logo {
             display: flex;
             align-items: center;
-
             gap: 12px;
 
             padding: 0 8px;
-
             margin-bottom: 48px;
         }
-
 
         .logo-icon {
             width: 44px;
@@ -74,17 +71,20 @@
                 );
 
             box-shadow:
-                0 8px 25px rgba(37, 99, 235, 0.25);
+                0 8px 25px rgba(
+                    37,
+                    99,
+                    235,
+                    0.25
+                );
 
             font-size: 22px;
         }
-
 
         .logo h2 {
             color: white;
             font-size: 19px;
         }
-
 
         .logo span {
             display: block;
@@ -93,61 +93,45 @@
             margin-top: 2px;
         }
 
-
         .menu-title {
             color: #475569;
-
             font-size: 10px;
-
             text-transform: uppercase;
-
             letter-spacing: 1.2px;
-
             margin: 0 12px 10px;
         }
-
 
         .menu-item {
             display: flex;
             align-items: center;
-
             gap: 13px;
 
             padding: 12px 14px;
-
             margin-bottom: 5px;
 
             border-radius: 10px;
 
             color: #94a3b8;
-
             text-decoration: none;
-
             font-size: 13px;
 
             transition: 0.2s;
         }
-
 
         .menu-item:hover {
             background: #151f30;
             color: white;
         }
 
-
         .menu-item.active {
             background: #172554;
-
             color: #60a5fa;
-
             border: 1px solid #1e3a8a;
         }
-
 
         .sidebar-bottom {
             margin-top: auto;
         }
-
 
         .user-card {
             padding: 13px;
@@ -155,17 +139,14 @@
             border-radius: 12px;
 
             background: #121c2c;
-
             border: 1px solid #1e293b;
 
             display: flex;
             align-items: center;
-
             gap: 10px;
 
             margin-bottom: 10px;
         }
-
 
         .avatar {
             width: 38px;
@@ -187,34 +168,27 @@
             justify-content: center;
 
             color: white;
-
             font-weight: 700;
         }
-
 
         .user-info {
             overflow: hidden;
         }
 
-
         .user-info strong {
             display: block;
 
             color: white;
-
             font-size: 13px;
 
             overflow: hidden;
-
             text-overflow: ellipsis;
         }
-
 
         .user-info span {
             color: #64748b;
             font-size: 10px;
         }
-
 
         .logout-btn {
             display: block;
@@ -226,7 +200,6 @@
             border-radius: 9px;
 
             color: #f87171;
-
             text-decoration: none;
 
             font-size: 12px;
@@ -234,57 +207,39 @@
             transition: 0.2s;
         }
 
-
         .logout-btn:hover {
             background: #24171b;
         }
 
-
-        /* Main */
-
         .main {
             margin-left: 250px;
-
             padding: 34px 42px;
-
             min-height: 100vh;
         }
 
-
         .topbar {
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
 
             margin-bottom: 28px;
         }
 
-
         .topbar h1 {
             color: white;
-
             font-size: 28px;
-
             letter-spacing: -0.7px;
         }
 
-
         .topbar p {
             color: #64748b;
-
             margin-top: 6px;
-
             font-size: 13px;
         }
 
-
         .back-btn {
             display: inline-flex;
-
             align-items: center;
-
             gap: 7px;
 
             padding: 9px 13px;
@@ -292,11 +247,9 @@
             border-radius: 9px;
 
             background: #0d1727;
-
             border: 1px solid #1e293b;
 
             color: #94a3b8;
-
             text-decoration: none;
 
             font-size: 11px;
@@ -304,25 +257,18 @@
             transition: 0.2s;
         }
 
-
         .back-btn:hover {
             color: white;
             background: #111d30;
         }
 
-
-        /* Summary cards */
-
         .summary {
             display: grid;
-
             grid-template-columns: repeat(3, 1fr);
 
             gap: 16px;
-
             margin-bottom: 22px;
         }
-
 
         .summary-card {
             background: #0d1422;
@@ -334,26 +280,19 @@
             padding: 19px;
         }
 
-
         .summary-title {
             color: #64748b;
-
             font-size: 11px;
         }
-
 
         .summary-value {
             color: white;
 
             font-size: 22px;
-
             font-weight: 600;
 
             margin-top: 9px;
         }
-
-
-        /* Main panel */
 
         .panel {
             background: #0d1422;
@@ -365,42 +304,30 @@
             overflow: hidden;
         }
 
-
         .panel-header {
             padding: 18px 20px;
 
             border-bottom: 1px solid #1b2638;
 
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
         }
 
-
         .panel-header h2 {
             color: white;
-
             font-size: 15px;
         }
 
-
         .panel-header span {
             color: #64748b;
-
             font-size: 11px;
         }
 
-
-        /* Search */
-
         .search-box {
             padding: 15px 20px;
-
             border-bottom: 1px solid #172131;
         }
-
 
         .search-box input {
             width: 100%;
@@ -408,7 +335,6 @@
             padding: 11px 13px;
 
             background: #080d18;
-
             border: 1px solid #263449;
 
             border-radius: 8px;
@@ -416,37 +342,33 @@
             outline: none;
 
             color: white;
-
             font-size: 12px;
         }
-
 
         .search-box input:focus {
             border-color: #2563eb;
 
             box-shadow:
-                0 0 0 3px rgba(37, 99, 235, 0.10);
+                0 0 0 3px rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
         }
-
 
         .search-box input::placeholder {
             color: #475569;
         }
 
-
-        /* Table */
-
         .table-wrapper {
             overflow-x: auto;
         }
 
-
         table {
             width: 100%;
-
             border-collapse: collapse;
         }
-
 
         th {
             color: #475569;
@@ -454,7 +376,6 @@
             font-size: 10px;
 
             text-transform: uppercase;
-
             letter-spacing: 0.7px;
 
             text-align: left;
@@ -464,37 +385,29 @@
             background: #0a111e;
         }
 
-
         td {
             padding: 15px 18px;
 
             border-top: 1px solid #172131;
 
             font-size: 12px;
-
             color: #94a3b8;
         }
-
 
         tr:hover td {
             background: #101a2a;
         }
 
-
         .file-name {
             display: flex;
-
             align-items: center;
-
             gap: 10px;
 
             color: #e2e8f0;
-
             font-weight: 500;
 
             min-width: 190px;
         }
-
 
         .file-icon {
             width: 36px;
@@ -507,27 +420,20 @@
             background: #172033;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             font-size: 15px;
         }
 
-
-        /* Encryption badge */
-
         .encrypted-badge {
             display: inline-flex;
-
             align-items: center;
-
             gap: 4px;
 
             color: #4ade80;
 
             background: #0b1f18;
-
             border: 1px solid #164e3a;
 
             padding: 5px 8px;
@@ -536,9 +442,6 @@
 
             font-size: 9px;
         }
-
-
-        /* Buttons */
 
         .action {
             display: inline-block;
@@ -552,70 +455,54 @@
             border-radius: 6px;
 
             margin-right: 5px;
-
             margin-bottom: 5px;
 
             transition: 0.2s;
         }
 
-
         .download {
             color: #60a5fa;
 
             background: #102346;
-
             border: 1px solid #1e3a8a;
         }
-
 
         .download:hover {
             background: #172f62;
         }
 
-
         .share {
             color: #4ade80;
 
             background: #0b1f18;
-
             border: 1px solid #164e3a;
         }
-
 
         .share:hover {
             background: #103426;
         }
 
-
         .unshare {
             color: #fbbf24;
 
             background: #241d0c;
-
             border: 1px solid #574314;
         }
-
 
         .unshare:hover {
             background: #33290f;
         }
 
-
         .delete {
             color: #f87171;
 
             background: #291719;
-
             border: 1px solid #4c2024;
         }
-
 
         .delete:hover {
             background: #3a1c20;
         }
-
-
-        /* Share link */
 
         .share-link {
             margin-top: 8px;
@@ -633,21 +520,16 @@
             max-width: 320px;
         }
 
-
         .share-link input {
             width: 100%;
 
             background: transparent;
-
             border: none;
-
             outline: none;
 
             color: #60a5fa;
-
             font-size: 9px;
         }
-
 
         .copy-btn {
             margin-top: 6px;
@@ -669,13 +551,9 @@
             font-size: 9px;
         }
 
-
         .copy-btn:hover {
             background: #1e3a8a;
         }
-
-
-        /* Empty state */
 
         .empty {
             padding: 70px 20px;
@@ -687,13 +565,10 @@
             font-size: 13px;
         }
 
-
         .empty-icon {
             font-size: 35px;
-
             margin-bottom: 12px;
         }
-
 
         .empty strong {
             display: block;
@@ -705,9 +580,6 @@
             margin-bottom: 5px;
         }
 
-
-        /* Responsive */
-
         @media (max-width: 1100px) {
 
             .summary {
@@ -716,15 +588,12 @@
 
         }
 
-
         @media (max-width: 800px) {
 
             .sidebar {
                 width: 70px;
-
                 padding: 20px 10px;
             }
-
 
             .logo h2,
             .logo span,
@@ -735,33 +604,25 @@
                 display: none;
             }
 
-
             .logo {
                 justify-content: center;
-
                 padding: 0;
             }
-
 
             .menu-item {
                 justify-content: center;
             }
 
-
             .main {
                 margin-left: 70px;
-
                 padding: 25px 18px;
             }
-
 
             .summary {
                 grid-template-columns: 1fr;
             }
 
-
         }
-
 
         @media (max-width: 500px) {
 
@@ -769,11 +630,9 @@
                 padding: 20px 12px;
             }
 
-
             .topbar h1 {
                 font-size: 23px;
             }
-
 
             .back-btn {
                 display: none;
@@ -785,619 +644,555 @@
 
 </head>
 
-
 <body>
 
+    <div class="sidebar">
 
-<!-- Sidebar -->
+        <div class="logo">
 
-<div class="sidebar">
-
-
-    <div class="logo">
-
-        <div class="logo-icon">
-            ☁
-        </div>
-
-        <div>
-
-            <h2>
-                SecureCloud
-            </h2>
-
-            <span>
-                Private Cloud Storage
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="menu-title">
-        Workspace
-    </div>
-
-
-    <a href="/dashboard" class="menu-item">
-
-        📊
-
-        <span>
-            Dashboard
-        </span>
-
-    </a>
-
-
-    <a href="/files" class="menu-item active">
-
-        📁
-
-        <span>
-            My Files
-        </span>
-
-    </a>
-
-
-    <div class="menu-title" style="margin-top: 25px;">
-        Account
-    </div>
-
-
-    <a href="/logout" class="menu-item">
-
-        🚪
-
-        <span>
-            Logout
-        </span>
-
-    </a>
-
-
-    <div class="sidebar-bottom">
-
-
-        <div class="user-card">
-
-            <div class="avatar">
-                {{ username[0]|upper }}
+            <div class="logo-icon">
+                ☁
             </div>
 
-            <div class="user-info">
+            <div>
 
-                <strong>
-                    {{ username }}
-                </strong>
+                <h2>
+                    SecureCloud
+                </h2>
 
                 <span>
-                    Personal Account
+                    Private Cloud Storage
                 </span>
 
             </div>
 
         </div>
 
-
-        <a href="/logout" class="logout-btn">
-            Sign out
-        </a>
-
-
-    </div>
-
-</div>
-
-
-<!-- Main content -->
-
-<div class="main">
-
-
-    <div class="topbar">
-
-
-        <div>
-
-            <h1>
-                My Files
-            </h1>
-
-            <p>
-                Manage your files stored securely in the cloud.
-            </p>
-
+        <div class="menu-title">
+            Workspace
         </div>
 
-
-        <a href="/dashboard" class="back-btn">
-            ← Dashboard
-        </a>
-
-
-    </div>
-
-
-    <!-- Summary -->
-
-    <div class="summary">
-
-
-        <div class="summary-card">
-
-            <div class="summary-title">
-                TOTAL FILES
-            </div>
-
-            <div class="summary-value">
-                {{ files|length }}
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-title">
-                STORAGE
-            </div>
-
-            <div class="summary-value">
-                AWS S3
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-title">
-                SECURITY
-            </div>
-
-            <div class="summary-value">
-                🔒 Encrypted
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- File panel -->
-
-    <div class="panel">
-
-
-        <div class="panel-header">
-
-            <h2>
-                All Files
-            </h2>
+        <a
+            href="/dashboard"
+            class="menu-item"
+        >
+            📊
 
             <span>
-                {{ files|length }} files
+                Dashboard
             </span>
+        </a>
 
+        <a
+            href="/files"
+            class="menu-item active"
+        >
+            📁
+
+            <span>
+                My Files
+            </span>
+        </a>
+
+        <div
+            class="menu-title"
+            style="margin-top: 25px;"
+        >
+            Account
         </div>
 
+        <a
+            href="/logout"
+            class="menu-item"
+        >
+            🚪
 
-        <!-- Search -->
+            <span>
+                Logout
+            </span>
+        </a>
 
-        <div class="search-box">
+        <div class="sidebar-bottom">
 
-            <input
-                type="text"
-                id="fileSearch"
-                placeholder="Search your files..."
-                onkeyup="searchFiles()"
+            <div class="user-card">
+
+                <div class="avatar">
+                    {{ username[0]|upper }}
+                </div>
+
+                <div class="user-info">
+
+                    <strong>
+                        {{ username }}
+                    </strong>
+
+                    <span>
+                        Personal Account
+                    </span>
+
+                </div>
+
+            </div>
+
+            <a
+                href="/logout"
+                class="logout-btn"
             >
+                Sign out
+            </a>
 
         </div>
 
+    </div>
 
-        {% if files %}
+    <div class="main">
 
+        <div class="topbar">
 
-        <div class="table-wrapper">
+            <div>
 
+                <h1>
+                    My Files
+                </h1>
 
-            <table>
+                <p>
+                    Manage your files stored securely in the cloud.
+                </p>
 
+            </div>
 
-                <thead>
+            <a
+                href="/dashboard"
+                class="back-btn"
+            >
+                ← Dashboard
+            </a>
 
-                    <tr>
+        </div>
 
-                        <th>
-                            File
-                        </th>
+        <div class="summary">
 
-                        <th>
-                            Type
-                        </th>
+            <div class="summary-card">
 
-                        <th>
-                            Size
-                        </th>
+                <div class="summary-title">
+                    TOTAL FILES
+                </div>
 
-                        <th>
-                            Security
-                        </th>
+                <div class="summary-value">
+                    {{ files|length }}
+                </div>
 
-                        <th>
-                            Uploaded
-                        </th>
+            </div>
 
-                        <th>
-                            Actions
-                        </th>
+            <div class="summary-card">
 
-                    </tr>
+                <div class="summary-title">
+                    STORAGE
+                </div>
 
-                </thead>
+                <div class="summary-value">
+                    AWS S3
+                </div>
 
+            </div>
 
-                <tbody id="fileTable">
+            <div class="summary-card">
 
+                <div class="summary-title">
+                    SECURITY
+                </div>
 
-                {% for file in files %}
+                <div class="summary-value">
+                    🔒 Encrypted
+                </div>
 
+            </div>
 
-                <tr>
+        </div>
 
+        <div class="panel">
 
-                    <td>
+            <div class="panel-header">
 
-                        <div class="file-name">
+                <h2>
+                    All Files
+                </h2>
 
+                <span>
+                    {{ files|length }} files
+                </span>
 
-                            <div class="file-icon">
+            </div>
 
+            <div class="search-box">
 
-                                {% if file.file_type and "image" in file.file_type %}
+                <input
+                    type="text"
+                    id="fileSearch"
+                    placeholder="Search your files..."
+                    onkeyup="searchFiles()"
+                >
 
-                                    🖼️
+            </div>
 
-                                {% elif file.file_type and "pdf" in file.file_type %}
+            {% if files %}
 
-                                    📕
+            <div class="table-wrapper">
 
-                                {% elif file.file_type and "text" in file.file_type %}
+                <table>
 
-                                    📄
+                    <thead>
 
-                                {% elif file.file_type and "video" in file.file_type %}
+                        <tr>
 
-                                    🎬
+                            <th>
+                                File
+                            </th>
 
-                                {% elif file.file_type and "audio" in file.file_type %}
+                            <th>
+                                Type
+                            </th>
 
-                                    🎵
+                            <th>
+                                Size
+                            </th>
+
+                            <th>
+                                Security
+                            </th>
+
+                            <th>
+                                Uploaded
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="fileTable">
+
+                        {% for file in files %}
+
+                        <tr>
+
+                            <td>
+
+                                <div class="file-name">
+
+                                    <div class="file-icon">
+
+                                        {% if file.file_type and "image" in file.file_type %}
+
+                                            🖼️
+
+                                        {% elif file.file_type and "pdf" in file.file_type %}
+
+                                            📕
+
+                                        {% elif file.file_type and "text" in file.file_type %}
+
+                                            📄
+
+                                        {% elif file.file_type and "video" in file.file_type %}
+
+                                            🎬
+
+                                        {% elif file.file_type and "audio" in file.file_type %}
+
+                                            🎵
+
+                                        {% else %}
+
+                                            📁
+
+                                        {% endif %}
+
+                                    </div>
+
+                                    {{ file.filename }}
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                {{ file.file_type or "File" }}
+                            </td>
+
+                            <td>
+
+                                {% if file.file_size %}
+
+                                    {% if file.file_size >= 1048576 %}
+
+                                        {{ "%.2f"|format(
+                                            file.file_size / 1048576
+                                        ) }} MB
+
+                                    {% else %}
+
+                                        {{ "%.2f"|format(
+                                            file.file_size / 1024
+                                        ) }} KB
+
+                                    {% endif %}
 
                                 {% else %}
 
-                                    📁
+                                    Unknown
 
                                 {% endif %}
 
+                            </td>
 
-                            </div>
+                            <td>
 
+                                {% if file.encrypted %}
 
-                            {{ file.filename }}
+                                    <span class="encrypted-badge">
+                                        🔒 Encrypted
+                                    </span>
 
+                                {% else %}
 
-                        </div>
+                                    —
 
-                    </td>
+                                {% endif %}
 
+                            </td>
 
-                    <td>
+                            <td>
 
-                        {{ file.file_type or "File" }}
+                                {% if file.uploaded_at %}
 
-                    </td>
+                                    {{ file.uploaded_at.strftime(
+                                        "%d-%m-%Y %H:%M"
+                                    ) }}
 
+                                {% else %}
 
-                    <td>
+                                    Unknown
 
+                                {% endif %}
 
-                        {% if file.file_size %}
+                            </td>
 
+                            <td>
 
-                            {% if file.file_size >= 1048576 %}
-
-                                {{ "%.2f"|format(file.file_size / 1048576) }} MB
-
-                            {% else %}
-
-                                {{ "%.2f"|format(file.file_size / 1024) }} KB
-
-                            {% endif %}
-
-
-                        {% else %}
-
-                            Unknown
-
-                        {% endif %}
-
-
-                    </td>
-
-
-                    <td>
-
-
-                        {% if file.encrypted %}
-
-                            <span class="encrypted-badge">
-                                🔒 Encrypted
-                            </span>
-
-                        {% else %}
-
-                            —
-
-                        {% endif %}
-
-
-                    </td>
-
-
-                    <td>
-
-
-                        {% if file.uploaded_at %}
-
-                            {{ file.uploaded_at.strftime("%d-%m-%Y %H:%M") }}
-
-                        {% else %}
-
-                            Unknown
-
-                        {% endif %}
-
-
-                    </td>
-
-
-                    <td>
-
-
-                        <a
-                            class="action download"
-                            href="/download/{{ file.id }}"
-                        >
-                            ↓ Download
-                        </a>
-
-
-                        <!-- Share -->
-
-                        {% if file.id in share_links %}
-
-
-                            <button
-                                class="action share"
-                                type="button"
-                                onclick="showShareLink('{{ file.id }}')"
-                            >
-                                🔗 Share
-                            </button>
-
-
-                            <form
-                                action="/unshare/{{ file.id }}"
-                                method="POST"
-                                style="display:inline;"
-                            >
-
-                                <button
-                                    class="action unshare"
-                                    type="submit"
-                                    onclick="return confirm('Stop sharing this file?');"
+                                <a
+                                    class="action download"
+                                    href="/download/{{ file.id }}"
                                 >
-                                    🚫 Stop Sharing
-                                </button>
+                                    ↓ Download
+                                </a>
 
-                            </form>
+                                {% if file.id in share_links %}
 
+                                    <button
+                                        class="action share"
+                                        type="button"
+                                        onclick="showShareLink('{{ file.id }}')"
+                                    >
+                                        🔗 Share
+                                    </button>
 
-                            <div
-                                class="share-link"
-                                id="share-{{ file.id }}"
-                            >
+                                    <form
+                                        action="/unshare/{{ file.id }}"
+                                        method="POST"
+                                        style="display: inline;"
+                                    >
 
-                                <input
-                                    type="text"
-                                    value="{{ share_links[file.id] }}"
-                                    id="link-{{ file.id }}"
-                                    readonly
+                                        <button
+                                            class="action unshare"
+                                            type="submit"
+                                            onclick="return confirm('Stop sharing this file?');"
+                                        >
+                                            🚫 Stop Sharing
+                                        </button>
+
+                                    </form>
+
+                                    <div
+                                        class="share-link"
+                                        id="share-{{ file.id }}"
+                                    >
+
+                                        <input
+                                            type="text"
+                                            value="{{ share_links[file.id] }}"
+                                            id="link-{{ file.id }}"
+                                            readonly
+                                        >
+
+                                        <button
+                                            class="copy-btn"
+                                            type="button"
+                                            onclick="copyLink('{{ file.id }}')"
+                                        >
+                                            📋 Copy Link
+                                        </button>
+
+                                    </div>
+
+                                {% else %}
+
+                                    <form
+                                        action="/share/{{ file.id }}"
+                                        method="POST"
+                                        style="display: inline;"
+                                    >
+
+                                        <button
+                                            class="action share"
+                                            type="submit"
+                                        >
+                                            🔗 Share
+                                        </button>
+
+                                    </form>
+
+                                {% endif %}
+
+                                <a
+                                    class="action delete"
+                                    href="/delete/{{ file.id }}"
+                                    onclick="return confirm('Delete this file?');"
                                 >
+                                    🗑 Delete
+                                </a>
 
+                            </td>
 
-                                <button
-                                    class="copy-btn"
-                                    type="button"
-                                    onclick="copyLink('{{ file.id }}')"
-                                >
-                                    📋 Copy Link
-                                </button>
+                        </tr>
 
-                            </div>
+                        {% endfor %}
 
+                    </tbody>
 
-                        {% else %}
+                </table>
 
-
-                            <form
-                                action="/share/{{ file.id }}"
-                                method="POST"
-                                style="display:inline;"
-                            >
-
-                                <button
-                                    class="action share"
-                                    type="submit"
-                                >
-                                    🔗 Share
-                                </button>
-
-                            </form>
-
-
-                        {% endif %}
-
-
-                        <a
-                            class="action delete"
-                            href="/delete/{{ file.id }}"
-                            onclick="return confirm('Delete this file?');"
-                        >
-                            🗑 Delete
-                        </a>
-
-
-                    </td>
-
-
-                </tr>
-
-
-                {% endfor %}
-
-
-                </tbody>
-
-
-            </table>
-
-
-        </div>
-
-
-        {% else %}
-
-
-        <div class="empty">
-
-
-            <div class="empty-icon">
-                📂
             </div>
 
+            {% else %}
 
-            <strong>
-                No files yet
-            </strong>
+            <div class="empty">
 
+                <div class="empty-icon">
+                    📂
+                </div>
 
-            Upload your first file from the dashboard.
+                <strong>
+                    No files yet
+                </strong>
 
+                Upload your first file from the dashboard.
+
+            </div>
+
+            {% endif %}
 
         </div>
-
-
-        {% endif %}
-
 
     </div>
 
+    <script>
 
-</div>
+        function searchFiles() {
 
+            const input =
+                document.getElementById(
+                    "fileSearch"
+                );
 
-<script>
+            const search =
+                input.value.toLowerCase();
 
+            const rows =
+                document.querySelectorAll(
+                    "#fileTable tr"
+                );
 
-    function searchFiles() {
+            rows.forEach(function (row) {
 
-        let input = document.getElementById(
-            "fileSearch"
-        );
+                const fileName =
+                    row.innerText.toLowerCase();
 
-        let search = input.value.toLowerCase();
+                if (fileName.includes(search)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
 
-        let rows = document.querySelectorAll(
-            "#fileTable tr"
-        );
-
-
-        rows.forEach(function(row) {
-
-            let fileName = row.innerText.toLowerCase();
-
-
-            if (fileName.includes(search)) {
-
-                row.style.display = "";
-
-            } else {
-
-                row.style.display = "none";
-
-            }
-
-        });
-
-    }
-
-
-    function showShareLink(fileId) {
-
-        let box = document.getElementById(
-            "share-" + fileId
-        );
-
-
-        if (box.style.display === "block") {
-
-            box.style.display = "none";
-
-        } else {
-
-            box.style.display = "block";
+            });
 
         }
 
-    }
+
+        function showShareLink(fileId) {
+
+            const box =
+                document.getElementById(
+                    "share-" + fileId
+                );
+
+            if (box.style.display === "block") {
+                box.style.display = "none";
+            } else {
+                box.style.display = "block";
+            }
+
+        }
 
 
-    function copyLink(fileId) {
+        function copyLink(fileId) {
 
-        let input = document.getElementById(
-            "link-" + fileId
-        );
+            const input =
+                document.getElementById(
+                    "link-" + fileId
+                );
 
+            const link = input.value;
 
-        input.select();
+            if (
+                navigator.clipboard &&
+                window.isSecureContext
+            ) {
 
-        input.setSelectionRange(
-            0,
-            99999
-        );
+                navigator.clipboard.writeText(
+                    link
+                ).then(function () {
 
+                    alert(
+                        "Share link copied!"
+                    );
 
-        navigator.clipboard.writeText(
-            input.value
-        );
+                });
 
+                return;
+            }
 
-        alert(
-            "Share link copied!"
-        );
+            input.select();
 
-    }
+            input.setSelectionRange(
+                0,
+                input.value.length
+            );
 
+            document.execCommand(
+                "copy"
+            );
 
-</script>
+            alert(
+                "Share link copied!"
+            );
 
+        }
+
+    </script>
 
 </body>
 

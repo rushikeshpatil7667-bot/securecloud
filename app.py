@@ -31,6 +31,8 @@ from cryptography.fernet import (
     InvalidToken
 )
 
+from dotenv import load_dotenv
+
 from datetime import datetime
 from io import BytesIO
 
@@ -39,31 +41,21 @@ import secrets
 import boto3
 
 
-# =========================================================
-# APP SETUP
-# =========================================================
+load_dotenv()
+
 
 app = Flask(__name__)
 
 
-# =========================================================
-# AWS S3 SETTINGS
-# =========================================================
-
-S3_BUCKET = "rushi-secure-cloud-storage-2026"
-S3_REGION = "ap-south-1"
-
-s3 = boto3.client(
-    "s3",
-    region_name=S3_REGION
+app.config["SECRET_KEY"] = os.environ.get(
+    "FLASK_SECRET_KEY"
 )
 
+if not app.config["SECRET_KEY"]:
+    raise RuntimeError(
+        "FLASK_SECRET_KEY is not set."
+    )
 
-# =========================================================
-# FLASK SETTINGS
-# =========================================================
-
-app.config["SECRET_KEY"] = "REMOVED_SECRET"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = (
     "sqlite:///database.db"
@@ -75,37 +67,52 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
-# =========================================================
-# ADMIN SETUP CODE
-# =========================================================
+S3_BUCKET = os.environ.get(
+    "S3_BUCKET",
+    "rushi-secure-cloud-storage-2026"
+)
 
-ADMIN_SETUP_CODE = "REMOVED_ADMIN_CODE"
+S3_REGION = os.environ.get(
+    "AWS_REGION",
+    "ap-south-1"
+)
 
 
-# =========================================================
-# LOGIN MANAGER
-# =========================================================
+s3 = boto3.client(
+    "s3",
+    region_name=S3_REGION
+)
+
+
+ADMIN_SETUP_CODE = os.environ.get(
+    "ADMIN_SETUP_CODE"
+)
+
+if not ADMIN_SETUP_CODE:
+    raise RuntimeError(
+        "ADMIN_SETUP_CODE is not set."
+    )
+
 
 login_manager = LoginManager(app)
 
 login_manager.login_view = "login"
 
 
-# =========================================================
-# LOCAL UPLOAD FOLDER
-# =========================================================
-
 UPLOAD_FOLDER = "uploads"
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs("instance", exist_ok=True)
+os.makedirs(
+    UPLOAD_FOLDER,
+    exist_ok=True
+)
 
+os.makedirs(
+    "instance",
+    exist_ok=True
+)
 
-# =========================================================
-# FILE ENCRYPTION
-# =========================================================
 
 KEY_FILE = os.path.join(
     "instance",
@@ -113,31 +120,35 @@ KEY_FILE = os.path.join(
 )
 
 
-# Create an encryption key the first time
-# the application is started.
-
 if not os.path.exists(KEY_FILE):
 
-    with open(KEY_FILE, "wb") as key_file:
+    with open(
+        KEY_FILE,
+        "wb"
+    ) as key_file:
 
         key_file.write(
             Fernet.generate_key()
         )
 
 
-with open(KEY_FILE, "rb") as key_file:
+with open(
+    KEY_FILE,
+    "rb"
+) as key_file:
 
     encryption_key = key_file.read()
 
 
-cipher = Fernet(encryption_key)
+cipher = Fernet(
+    encryption_key
+)
 
 
-# =========================================================
-# USER MODEL
-# =========================================================
-
-class User(db.Model, UserMixin):
+class User(
+    db.Model,
+    UserMixin
+):
 
     id = db.Column(
         db.Integer,
@@ -162,10 +173,6 @@ class User(db.Model, UserMixin):
     )
 
 
-# =========================================================
-# FILE MODEL
-# =========================================================
-
 class File(db.Model):
 
     id = db.Column(
@@ -180,20 +187,7 @@ class File(db.Model):
 
     owner_id = db.Column(
         db.Integer,
-        db.ForeignKey("user.id"),
         nullable=False
-    )
-
-    # This relationship lets us use:
-    #
-    # file.owner.username
-    #
-    # inside the admin template.
-
-    owner = db.relationship(
-        "User",
-        foreign_keys=[owner_id],
-        backref="files"
     )
 
     file_size = db.Column(
@@ -216,10 +210,6 @@ class File(db.Model):
         default=True
     )
 
-
-# =========================================================
-# FILE SHARING MODEL
-# =========================================================
 
 class FileShare(db.Model):
 
@@ -255,10 +245,6 @@ class FileShare(db.Model):
     )
 
 
-# =========================================================
-# ACTIVITY LOG MODEL
-# =========================================================
-
 class ActivityLog(db.Model):
 
     id = db.Column(
@@ -287,10 +273,6 @@ class ActivityLog(db.Model):
     )
 
 
-# =========================================================
-# LOAD USER
-# =========================================================
-
 @login_manager.user_loader
 def load_user(user_id):
 
@@ -299,17 +281,9 @@ def load_user(user_id):
     )
 
 
-# =========================================================
-# DATABASE SETUP
-# =========================================================
-
 with app.app_context():
 
     db.create_all()
-
-    # -----------------------------------------------------
-    # Add role column to old databases if necessary
-    # -----------------------------------------------------
 
     user_columns = db.session.execute(
         db.text(
@@ -332,21 +306,12 @@ with app.app_context():
             )
         )
 
-
-    # Make sure old accounts have a role.
-
     db.session.execute(
         db.text(
-            "UPDATE user "
-            "SET role = 'user' "
+            "UPDATE user SET role = 'user' "
             "WHERE role IS NULL"
         )
     )
-
-
-    # -----------------------------------------------------
-    # Add newer file columns to old databases
-    # -----------------------------------------------------
 
     file_columns = db.session.execute(
         db.text(
@@ -359,7 +324,6 @@ with app.app_context():
         for column in file_columns
     ]
 
-
     if "file_size" not in file_column_names:
 
         db.session.execute(
@@ -368,7 +332,6 @@ with app.app_context():
                 "ADD COLUMN file_size INTEGER"
             )
         )
-
 
     if "file_type" not in file_column_names:
 
@@ -379,7 +342,6 @@ with app.app_context():
             )
         )
 
-
     if "uploaded_at" not in file_column_names:
 
         db.session.execute(
@@ -388,7 +350,6 @@ with app.app_context():
                 "ADD COLUMN uploaded_at DATETIME"
             )
         )
-
 
     if "encrypted" not in file_column_names:
 
@@ -400,13 +361,8 @@ with app.app_context():
             )
         )
 
-
     db.session.commit()
 
-
-# =========================================================
-# HOME
-# =========================================================
 
 @app.route("/")
 def home():
@@ -415,10 +371,6 @@ def home():
         url_for("login")
     )
 
-
-# =========================================================
-# REGISTER
-# =========================================================
 
 @app.route(
     "/register",
@@ -429,39 +381,38 @@ def register():
     if request.method == "POST":
 
         username = request.form.get(
-            "username"
-        )
+            "username",
+            ""
+        ).strip()
 
         password = request.form.get(
-            "password"
+            "password",
+            ""
         )
-
 
         if not username or not password:
 
             return (
                 "Username and password are required."
-            )
-
+            ), 400
 
         existing_user = User.query.filter_by(
             username=username
         ).first()
-
 
         if existing_user:
 
             return (
                 "Username already exists. "
                 "Please choose another one."
+            ), 409
+
+        hashed_password = (
+            generate_password_hash(
+                password,
+                method="pbkdf2:sha256"
             )
-
-
-        hashed_password = generate_password_hash(
-            password,
-            method="pbkdf2:sha256"
         )
-
 
         new_user = User(
             username=username,
@@ -469,25 +420,20 @@ def register():
             role="user"
         )
 
-
-        db.session.add(new_user)
+        db.session.add(
+            new_user
+        )
 
         db.session.commit()
-
 
         return redirect(
             url_for("login")
         )
 
-
     return render_template(
         "register.html"
     )
 
-
-# =========================================================
-# LOGIN
-# =========================================================
 
 @app.route(
     "/login",
@@ -498,18 +444,18 @@ def login():
     if request.method == "POST":
 
         username = request.form.get(
-            "username"
-        )
+            "username",
+            ""
+        ).strip()
 
         password = request.form.get(
-            "password"
+            "password",
+            ""
         )
-
 
         user = User.query.filter_by(
             username=username
         ).first()
-
 
         if user and check_password_hash(
             user.password,
@@ -522,21 +468,15 @@ def login():
                 url_for("dashboard")
             )
 
-
         return (
             "Invalid username or password. "
             "Please try again."
-        )
-
+        ), 401
 
     return render_template(
         "login.html"
     )
 
-
-# =========================================================
-# ADMIN SETUP
-# =========================================================
 
 @app.route(
     "/admin-setup",
@@ -547,58 +487,51 @@ def admin_setup():
     if request.method == "POST":
 
         username = request.form.get(
-            "username"
-        )
+            "username",
+            ""
+        ).strip()
 
         setup_code = request.form.get(
-            "setup_code"
+            "setup_code",
+            ""
         )
 
+        if not setup_code:
 
-        # The setup code is checked before
-        # changing the user's role.
+            return (
+                "Admin setup code is required."
+            ), 400
 
         if setup_code != ADMIN_SETUP_CODE:
 
             return (
                 "Invalid admin setup code."
-            )
-
+            ), 403
 
         user = User.query.filter_by(
             username=username
         ).first()
-
 
         if not user:
 
             return (
                 "User not found. "
                 "Register the account first."
-            )
-
-
-        # Promote the selected account.
+            ), 404
 
         user.role = "admin"
 
         db.session.commit()
-
 
         return (
             "Admin account created successfully. "
             "You can now login with this account."
         )
 
-
     return render_template(
         "admin_setup.html"
     )
 
-
-# =========================================================
-# DASHBOARD
-# =========================================================
 
 @app.route("/dashboard")
 @login_required
@@ -610,13 +543,11 @@ def dashboard():
         File.uploaded_at.desc()
     ).all()
 
-
     logs = ActivityLog.query.filter_by(
         username=current_user.username
     ).order_by(
         ActivityLog.timestamp.desc()
     ).limit(10).all()
-
 
     return render_template(
         "dashboard.html",
@@ -625,10 +556,6 @@ def dashboard():
         username=current_user.username
     )
 
-
-# =========================================================
-# MY FILES
-# =========================================================
 
 @app.route("/files")
 @login_required
@@ -640,24 +567,22 @@ def my_files():
         File.uploaded_at.desc()
     ).all()
 
-
     shares = FileShare.query.filter_by(
         owner_id=current_user.id,
         active=True
     ).all()
 
-
     share_links = {}
-
 
     for share in shares:
 
-        share_links[share.file_id] = url_for(
+        share_links[
+            share.file_id
+        ] = url_for(
             "shared_file",
             token=share.share_token,
             _external=True
         )
-
 
     return render_template(
         "files.html",
@@ -668,15 +593,9 @@ def my_files():
     )
 
 
-# =========================================================
-# ADMIN PANEL
-# =========================================================
-
 @app.route("/admin")
 @login_required
 def admin_panel():
-
-    # Only administrators are allowed here.
 
     if current_user.role != "admin":
 
@@ -685,21 +604,17 @@ def admin_panel():
             "Administrator permission is required."
         ), 403
 
-
     users = User.query.order_by(
         User.id.asc()
     ).all()
-
 
     files = File.query.order_by(
         File.uploaded_at.desc()
     ).all()
 
-
     logs = ActivityLog.query.order_by(
         ActivityLog.timestamp.desc()
     ).limit(50).all()
-
 
     return render_template(
         "admin.html",
@@ -708,10 +623,6 @@ def admin_panel():
         logs=logs
     )
 
-
-# =========================================================
-# UPLOAD ONE OR MULTIPLE FILES
-# =========================================================
 
 @app.route(
     "/upload",
@@ -724,55 +635,41 @@ def upload_file():
         "files"
     )
 
-
     if not files:
 
-        return "No files selected."
-
+        return (
+            "No files selected."
+        ), 400
 
     uploaded_count = 0
 
-
     for file in files:
 
-        if file.filename == "":
-
+        if not file or not file.filename:
             continue
-
 
         filename = secure_filename(
             file.filename
         )
 
-
         if not filename:
-
             continue
-
 
         original_data = file.read()
 
-
         if not original_data:
-
             continue
-
-
-        # Check whether the same user
-        # already has a file with this name.
 
         old_file = File.query.filter_by(
             owner_id=current_user.id,
             filename=filename
         ).first()
 
-
         if old_file:
 
             name, extension = os.path.splitext(
                 filename
             )
-
 
             filename = (
                 name
@@ -783,22 +680,14 @@ def upload_file():
                 + extension
             )
 
-
-        # Encrypt the file before
-        # sending it to AWS S3.
-
         encrypted_data = cipher.encrypt(
             original_data
         )
-
-
-        # Each user gets their own S3 folder.
 
         s3_key = (
             f"user_{current_user.id}/"
             f"{filename}"
         )
-
 
         try:
 
@@ -808,27 +697,25 @@ def upload_file():
                 s3_key
             )
 
-        except Exception as error:
+        except Exception:
 
             return (
-                f"Upload failed for "
-                f"{filename}: {error}"
-            )
-
+                "The file could not be uploaded."
+            ), 500
 
         new_file = File(
             filename=filename,
             owner_id=current_user.id,
-            file_size=len(original_data),
+            file_size=len(
+                original_data
+            ),
             file_type=file.content_type,
             encrypted=True
         )
 
-
         db.session.add(
             new_file
         )
-
 
         activity = ActivityLog(
             username=current_user.username,
@@ -836,33 +723,24 @@ def upload_file():
             filename=filename
         )
 
-
         db.session.add(
             activity
         )
 
-
         uploaded_count += 1
 
-
     db.session.commit()
-
 
     if uploaded_count == 0:
 
         return (
             "No valid files were uploaded."
-        )
-
+        ), 400
 
     return redirect(
         url_for("dashboard")
     )
 
-
-# =========================================================
-# DOWNLOAD PRIVATE FILE
-# =========================================================
 
 @app.route(
     "/download/<int:file_id>"
@@ -870,19 +748,15 @@ def upload_file():
 @login_required
 def download_file(file_id):
 
-    # A user can only download their own file.
-
     file = File.query.filter_by(
         id=file_id,
         owner_id=current_user.id
     ).first_or_404()
 
-
     s3_key = (
         f"user_{current_user.id}/"
         f"{file.filename}"
     )
-
 
     try:
 
@@ -891,11 +765,9 @@ def download_file(file_id):
             Key=s3_key
         )
 
-
-        encrypted_data = response[
-            "Body"
-        ].read()
-
+        encrypted_data = (
+            response["Body"].read()
+        )
 
         try:
 
@@ -906,10 +778,8 @@ def download_file(file_id):
         except InvalidToken:
 
             return (
-                "Unable to decrypt this file. "
-                "The encryption key may not match."
-            )
-
+                "Unable to decrypt this file."
+            ), 500
 
         activity = ActivityLog(
             username=current_user.username,
@@ -917,33 +787,28 @@ def download_file(file_id):
             filename=file.filename
         )
 
-
         db.session.add(
             activity
         )
 
         db.session.commit()
 
-
         return send_file(
             BytesIO(original_data),
             as_attachment=True,
             download_name=file.filename,
-            mimetype=file.file_type
-            or "application/octet-stream"
+            mimetype=(
+                file.file_type
+                or "application/octet-stream"
+            )
         )
 
-
-    except Exception as error:
+    except Exception:
 
         return (
-            f"Download failed: {error}"
-        )
+            "The file could not be downloaded."
+        ), 500
 
-
-# =========================================================
-# CREATE SHARE LINK
-# =========================================================
 
 @app.route(
     "/share/<int:file_id>",
@@ -952,14 +817,10 @@ def download_file(file_id):
 @login_required
 def share_file(file_id):
 
-    # Only the owner can create
-    # a share link.
-
     file = File.query.filter_by(
         id=file_id,
         owner_id=current_user.id
     ).first_or_404()
-
 
     existing_share = FileShare.query.filter_by(
         file_id=file.id,
@@ -967,18 +828,17 @@ def share_file(file_id):
         active=True
     ).first()
 
-
     if existing_share:
 
-        share_token = existing_share.share_token
-
+        share_token = (
+            existing_share.share_token
+        )
 
     else:
 
         share_token = secrets.token_urlsafe(
             32
         )
-
 
         new_share = FileShare(
             file_id=file.id,
@@ -987,11 +847,9 @@ def share_file(file_id):
             active=True
         )
 
-
         db.session.add(
             new_share
         )
-
 
         activity = ActivityLog(
             username=current_user.username,
@@ -999,14 +857,11 @@ def share_file(file_id):
             filename=file.filename
         )
 
-
         db.session.add(
             activity
         )
 
-
         db.session.commit()
-
 
     share_link = url_for(
         "shared_file",
@@ -1014,17 +869,12 @@ def share_file(file_id):
         _external=True
     )
 
-
     return render_template(
         "share.html",
         file=file,
         share_link=share_link
     )
 
-
-# =========================================================
-# DOWNLOAD SHARED FILE
-# =========================================================
 
 @app.route(
     "/shared/<token>"
@@ -1036,30 +886,22 @@ def shared_file(token):
         active=True
     ).first()
 
-
     if not share:
 
         abort(404)
-
 
     file = File.query.filter_by(
         id=share.file_id
     ).first()
 
-
     if not file:
 
         abort(404)
-
-
-    # The file belongs to the user who
-    # created the share link.
 
     s3_key = (
         f"user_{share.owner_id}/"
         f"{file.filename}"
     )
-
 
     try:
 
@@ -1068,11 +910,9 @@ def shared_file(token):
             Key=s3_key
         )
 
-
-        encrypted_data = response[
-            "Body"
-        ].read()
-
+        encrypted_data = (
+            response["Body"].read()
+        )
 
         try:
 
@@ -1084,8 +924,7 @@ def shared_file(token):
 
             return (
                 "Unable to decrypt this shared file."
-            )
-
+            ), 500
 
         activity = ActivityLog(
             username="Shared Link",
@@ -1093,33 +932,28 @@ def shared_file(token):
             filename=file.filename
         )
 
-
         db.session.add(
             activity
         )
 
         db.session.commit()
 
-
         return send_file(
             BytesIO(original_data),
             as_attachment=True,
             download_name=file.filename,
-            mimetype=file.file_type
-            or "application/octet-stream"
+            mimetype=(
+                file.file_type
+                or "application/octet-stream"
+            )
         )
 
-
-    except Exception as error:
+    except Exception:
 
         return (
-            f"Shared download failed: {error}"
-        )
+            "The shared file could not be downloaded."
+        ), 500
 
-
-# =========================================================
-# STOP SHARING
-# =========================================================
 
 @app.route(
     "/unshare/<int:file_id>",
@@ -1133,18 +967,15 @@ def unshare_file(file_id):
         owner_id=current_user.id
     ).first_or_404()
 
-
     share = FileShare.query.filter_by(
         file_id=file.id,
         owner_id=current_user.id,
         active=True
     ).first()
 
-
     if share:
 
         share.active = False
-
 
         activity = ActivityLog(
             username=current_user.username,
@@ -1152,44 +983,33 @@ def unshare_file(file_id):
             filename=file.filename
         )
 
-
         db.session.add(
             activity
         )
 
-
         db.session.commit()
-
 
     return redirect(
         url_for("my_files")
     )
 
 
-# =========================================================
-# DELETE FILE
-# =========================================================
-
 @app.route(
-    "/delete/<int:file_id>"
+    "/delete/<int:file_id>",
+    methods=["POST", "GET"]
 )
 @login_required
 def delete_file(file_id):
-
-    # Users can only delete files
-    # that belong to them.
 
     file = File.query.filter_by(
         id=file_id,
         owner_id=current_user.id
     ).first_or_404()
 
-
     s3_key = (
         f"user_{current_user.id}/"
         f"{file.filename}"
     )
-
 
     try:
 
@@ -1198,26 +1018,20 @@ def delete_file(file_id):
             Key=s3_key
         )
 
-    except Exception as error:
+    except Exception:
 
         return (
-            f"Delete failed: {error}"
-        )
-
-
-    # Disable any share links for
-    # this file before deleting it.
+            "The file could not be deleted."
+        ), 500
 
     shares = FileShare.query.filter_by(
         file_id=file.id,
         owner_id=current_user.id
     ).all()
 
-
     for share in shares:
 
         share.active = False
-
 
     activity = ActivityLog(
         username=current_user.username,
@@ -1225,28 +1039,20 @@ def delete_file(file_id):
         filename=file.filename
     )
 
-
     db.session.add(
         activity
     )
-
 
     db.session.delete(
         file
     )
 
-
     db.session.commit()
-
 
     return redirect(
         url_for("dashboard")
     )
 
-
-# =========================================================
-# LOGOUT
-# =========================================================
 
 @app.route("/logout")
 @login_required
@@ -1258,10 +1064,6 @@ def logout():
         url_for("login")
     )
 
-
-# =========================================================
-# START APPLICATION
-# =========================================================
 
 if __name__ == "__main__":
 

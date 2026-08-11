@@ -4,7 +4,11 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Login | SecureCloud</title>
 
@@ -43,7 +47,6 @@
             color: #e5e7eb;
         }
 
-
         .container {
             width: 100%;
             max-width: 440px;
@@ -51,6 +54,7 @@
             background: #0d1422;
 
             border: 1px solid #1e293b;
+
             border-radius: 20px;
 
             padding: 38px;
@@ -60,7 +64,6 @@
 
             animation: appear 0.45s ease;
         }
-
 
         @keyframes appear {
 
@@ -73,11 +76,7 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-
         }
-
-
-        /* Logo */
 
         .logo {
             text-align: center;
@@ -106,7 +105,8 @@
                 );
 
             box-shadow:
-                0 10px 30px rgba(37, 99, 235, 0.25);
+                0 10px 30px
+                rgba(37, 99, 235, 0.25);
         }
 
         .logo h1 {
@@ -122,9 +122,6 @@
 
             font-size: 12px;
         }
-
-
-        /* Login form */
 
         .form-group {
             margin-bottom: 17px;
@@ -168,15 +165,13 @@
             border-color: #2563eb;
 
             box-shadow:
-                0 0 0 3px rgba(37, 99, 235, 0.12);
+                0 0 0 3px
+                rgba(37, 99, 235, 0.12);
         }
 
         input::placeholder {
             color: #475569;
         }
-
-
-        /* Login button */
 
         button {
             width: 100%;
@@ -207,22 +202,21 @@
             transition: 0.2s;
 
             box-shadow:
-                0 8px 20px rgba(37, 99, 235, 0.18);
+                0 8px 20px
+                rgba(37, 99, 235, 0.18);
         }
 
         button:hover {
             transform: translateY(-1px);
 
             box-shadow:
-                0 12px 25px rgba(37, 99, 235, 0.28);
+                0 12px 25px
+                rgba(37, 99, 235, 0.28);
         }
 
         button:active {
             transform: translateY(0);
         }
-
-
-        /* Security box */
 
         .security-box {
             display: flex;
@@ -275,9 +269,6 @@
             margin-top: 2px;
         }
 
-
-        /* Register link */
-
         .footer {
             text-align: center;
 
@@ -304,7 +295,6 @@
             text-decoration: underline;
         }
 
-
         .bottom-note {
             display: flex;
 
@@ -329,9 +319,9 @@
             border-radius: 50%;
 
             box-shadow:
-                0 0 7px rgba(34, 197, 94, 0.5);
+                0 0 7px
+                rgba(34, 197, 94, 0.5);
         }
-
 
         @media (max-width: 500px) {
 
@@ -349,116 +339,110 @@
 
 </head>
 
-
 <body>
 
+    <div class="container">
 
-<div class="container">
+        <div class="logo">
 
+            <div class="logo-icon">
+                ☁
+            </div>
 
-    <div class="logo">
+            <h1>
+                SecureCloud
+            </h1>
 
-        <div class="logo-icon">
-            ☁
+            <p>
+                Secure cloud storage powered by AWS
+            </p>
+
         </div>
 
-        <h1>SecureCloud</h1>
+        <form
+            action="/login"
+            method="POST"
+        >
 
-        <p>
-            Secure cloud storage powered by AWS
-        </p>
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button type="submit">
+                Sign In
+            </button>
+
+        </form>
+
+        <div class="security-box">
+
+            <div class="security-icon">
+                🔐
+            </div>
+
+            <div class="security-text">
+
+                <strong>
+                    Secure login
+                </strong>
+
+                <span>
+                    Your credentials are protected with secure password hashing.
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+
+            Don't have an account?
+
+            <a href="/register">
+                Create one
+            </a>
+
+        </div>
+
+        <div class="bottom-note">
+
+            <div class="dot"></div>
+
+            SecureCloud protected environment
+
+        </div>
 
     </div>
-
-
-    <form action="/login" method="POST">
-
-
-        <div class="form-group">
-
-            <label>
-                Username
-            </label>
-
-            <input
-                type="text"
-                name="username"
-                placeholder="Enter your username"
-                autocomplete="username"
-                required
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Password
-            </label>
-
-            <input
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-                required
-            >
-
-        </div>
-
-
-        <button type="submit">
-            Sign In
-        </button>
-
-
-    </form>
-
-
-    <div class="security-box">
-
-        <div class="security-icon">
-            🔐
-        </div>
-
-        <div class="security-text">
-
-            <strong>
-                Secure login
-            </strong>
-
-            <span>
-                Your credentials are protected with secure password hashing.
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="footer">
-
-        Don't have an account?
-
-        <a href="/register">
-            Create one
-        </a>
-
-    </div>
-
-
-    <div class="bottom-note">
-
-        <div class="dot"></div>
-
-        SecureCloud protected environment
-
-    </div>
-
-
-</div>
-
 
 </body>
 
