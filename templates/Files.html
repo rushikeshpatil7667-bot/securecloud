@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Files | SecureCloud</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #080d18;
+            color: #e5e7eb;
+            min-height: 100vh;
+        }
+
+
+        /* Sidebar */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: #0d1422;
+            border-right: 1px solid #1b2638;
+
+            padding: 28px 18px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 0 8px;
+
+            margin-bottom: 48px;
+        }
+
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            box-shadow:
+                0 8px 25px rgba(37, 99, 235, 0.25);
+
+            font-size: 22px;
+        }
+
+
+        .logo h2 {
+            color: white;
+            font-size: 19px;
+        }
+
+
+        .logo span {
+            display: block;
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+
+        .menu-title {
+            color: #475569;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+            margin: 0 12px 10px;
+        }
+
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 5px;
+
+            border-radius: 10px;
+
+            color: #94a3b8;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+
+        .menu-item:hover {
+            background: #151f30;
+            color: white;
+        }
+
+
+        .menu-item.active {
+            background: #172554;
+
+            color: #60a5fa;
+
+            border: 1px solid #1e3a8a;
+        }
+
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+
+        .user-card {
+            padding: 13px;
+
+            border-radius: 12px;
+
+            background: #121c2c;
+
+            border: 1px solid #1e293b;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-weight: 700;
+        }
+
+
+        .user-info {
+            overflow: hidden;
+        }
+
+
+        .user-info strong {
+            display: block;
+
+            color: white;
+
+            font-size: 13px;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .user-info span {
+            color: #64748b;
+            font-size: 10px;
+        }
+
+
+        .logout-btn {
+            display: block;
+
+            text-align: center;
+
+            padding: 10px;
+
+            border-radius: 9px;
+
+            color: #f87171;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+
+        .logout-btn:hover {
+            background: #24171b;
+        }
+
+
+        /* Main */
+
+        .main {
+            margin-left: 250px;
+
+            padding: 34px 42px;
+
+            min-height: 100vh;
+        }
+
+
+        .topbar {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 28px;
+        }
+
+
+        .topbar h1 {
+            color: white;
+
+            font-size: 28px;
+
+            letter-spacing: -0.7px;
+        }
+
+
+        .topbar p {
+            color: #64748b;
+
+            margin-top: 6px;
+
+            font-size: 13px;
+        }
+
+
+        .back-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            background: #0d1727;
+
+            border: 1px solid #1e293b;
+
+            color: #94a3b8;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            transition: 0.2s;
+        }
+
+
+        .back-btn:hover {
+            color: white;
+            background: #111d30;
+        }
+
+
+        /* Summary cards */
+
+        .summary {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .summary-card {
+            background: #0d1422;
+
+            border: 1px solid #1b2638;
+
+            border-radius: 15px;
+
+            padding: 19px;
+        }
+
+
+        .summary-title {
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+
+        .summary-value {
+            color: white;
+
+            font-size: 22px;
+
+            font-weight: 600;
+
+            margin-top: 9px;
+        }
+
+
+        /* Main panel */
+
+        .panel {
+            background: #0d1422;
+
+            border: 1px solid #1b2638;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+        }
+
+
+        .panel-header {
+            padding: 18px 20px;
+
+            border-bottom: 1px solid #1b2638;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .panel-header h2 {
+            color: white;
+
+            font-size: 15px;
+        }
+
+
+        .panel-header span {
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+
+        /* Search */
+
+        .search-box {
+            padding: 15px 20px;
+
+            border-bottom: 1px solid #172131;
+        }
+
+
+        .search-box input {
+            width: 100%;
+
+            padding: 11px 13px;
+
+            background: #080d18;
+
+            border: 1px solid #263449;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            color: white;
+
+            font-size: 12px;
+        }
+
+
+        .search-box input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        .search-box input::placeholder {
+            color: #475569;
+        }
+
+
+        /* Table */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+            color: #475569;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            text-align: left;
+
+            padding: 13px 18px;
+
+            background: #0a111e;
+        }
+
+
+        td {
+            padding: 15px 18px;
+
+            border-top: 1px solid #172131;
+
+            font-size: 12px;
+
+            color: #94a3b8;
+        }
+
+
+        tr:hover td {
+            background: #101a2a;
+        }
+
+
+        .file-name {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #e2e8f0;
+
+            font-weight: 500;
+
+            min-width: 190px;
+        }
+
+
+        .file-icon {
+            width: 36px;
+            height: 36px;
+
+            flex-shrink: 0;
+
+            border-radius: 9px;
+
+            background: #172033;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 15px;
+        }
+
+
+        /* Encryption badge */
+
+        .encrypted-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            color: #4ade80;
+
+            background: #0b1f18;
+
+            border: 1px solid #164e3a;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            font-size: 9px;
+        }
+
+
+        /* Buttons */
+
+        .action {
+            display: inline-block;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            padding: 6px 9px;
+
+            border-radius: 6px;
+
+            margin-right: 5px;
+
+            margin-bottom: 5px;
+
+            transition: 0.2s;
+        }
+
+
+        .download {
+            color: #60a5fa;
+
+            background: #102346;
+
+            border: 1px solid #1e3a8a;
+        }
+
+
+        .download:hover {
+            background: #172f62;
+        }
+
+
+        .share {
+            color: #4ade80;
+
+            background: #0b1f18;
+
+            border: 1px solid #164e3a;
+        }
+
+
+        .share:hover {
+            background: #103426;
+        }
+
+
+        .unshare {
+            color: #fbbf24;
+
+            background: #241d0c;
+
+            border: 1px solid #574314;
+        }
+
+
+        .unshare:hover {
+            background: #33290f;
+        }
+
+
+        .delete {
+            color: #f87171;
+
+            background: #291719;
+
+            border: 1px solid #4c2024;
+        }
+
+
+        .delete:hover {
+            background: #3a1c20;
+        }
+
+
+        /* Share link */
+
+        .share-link {
+            margin-top: 8px;
+
+            padding: 8px;
+
+            background: #080d18;
+
+            border: 1px solid #1e293b;
+
+            border-radius: 7px;
+
+            display: none;
+
+            max-width: 320px;
+        }
+
+
+        .share-link input {
+            width: 100%;
+
+            background: transparent;
+
+            border: none;
+
+            outline: none;
+
+            color: #60a5fa;
+
+            font-size: 9px;
+        }
+
+
+        .copy-btn {
+            margin-top: 6px;
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 6px;
+
+            padding: 6px;
+
+            background: #172554;
+
+            color: #60a5fa;
+
+            cursor: pointer;
+
+            font-size: 9px;
+        }
+
+
+        .copy-btn:hover {
+            background: #1e3a8a;
+        }
+
+
+        /* Empty state */
+
+        .empty {
+            padding: 70px 20px;
+
+            text-align: center;
+
+            color: #475569;
+
+            font-size: 13px;
+        }
+
+
+        .empty-icon {
+            font-size: 35px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .empty strong {
+            display: block;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* Responsive */
+
+        @media (max-width: 1100px) {
+
+            .summary {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 70px;
+
+                padding: 20px 10px;
+            }
+
+
+            .logo h2,
+            .logo span,
+            .menu-title,
+            .menu-item span,
+            .user-info,
+            .logout-btn {
+                display: none;
+            }
+
+
+            .logo {
+                justify-content: center;
+
+                padding: 0;
+            }
+
+
+            .menu-item {
+                justify-content: center;
+            }
+
+
+            .main {
+                margin-left: 70px;
+
+                padding: 25px 18px;
+            }
+
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .main {
+                padding: 20px 12px;
+            }
+
+
+            .topbar h1 {
+                font-size: 23px;
+            }
+
+
+            .back-btn {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ☁
+        </div>
+
+        <div>
+
+            <h2>
+                SecureCloud
+            </h2>
+
+            <span>
+                Private Cloud Storage
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="menu-title">
+        Workspace
+    </div>
+
+
+    <a href="/dashboard" class="menu-item">
+
+        📊
+
+        <span>
+            Dashboard
+        </span>
+
+    </a>
+
+
+    <a href="/files" class="menu-item active">
+
+        📁
+
+        <span>
+            My Files
+        </span>
+
+    </a>
+
+
+    <div class="menu-title" style="margin-top: 25px;">
+        Account
+    </div>
+
+
+    <a href="/logout" class="menu-item">
+
+        🚪
+
+        <span>
+            Logout
+        </span>
+
+    </a>
+
+
+    <div class="sidebar-bottom">
+
+
+        <div class="user-card">
+
+            <div class="avatar">
+                {{ username[0]|upper }}
+            </div>
+
+            <div class="user-info">
+
+                <strong>
+                    {{ username }}
+                </strong>
+
+                <span>
+                    Personal Account
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <a href="/logout" class="logout-btn">
+            Sign out
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- Main content -->
+
+<div class="main">
+
+
+    <div class="topbar">
+
+
+        <div>
+
+            <h1>
+                My Files
+            </h1>
+
+            <p>
+                Manage your files stored securely in the cloud.
+            </p>
+
+        </div>
+
+
+        <a href="/dashboard" class="back-btn">
+            ← Dashboard
+        </a>
+
+
+    </div>
+
+
+    <!-- Summary -->
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                TOTAL FILES
+            </div>
+
+            <div class="summary-value">
+                {{ files|length }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                STORAGE
+            </div>
+
+            <div class="summary-value">
+                AWS S3
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                SECURITY
+            </div>
+
+            <div class="summary-value">
+                🔒 Encrypted
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- File panel -->
+
+    <div class="panel">
+
+
+        <div class="panel-header">
+
+            <h2>
+                All Files
+            </h2>
+
+            <span>
+                {{ files|length }} files
+            </span>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="fileSearch"
+                placeholder="Search your files..."
+                onkeyup="searchFiles()"
+            >
+
+        </div>
+
+
+        {% if files %}
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            File
+                        </th>
+
+                        <th>
+                            Type
+                        </th>
+
+                        <th>
+                            Size
+                        </th>
+
+                        <th>
+                            Security
+                        </th>
+
+                        <th>
+                            Uploaded
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="fileTable">
+
+
+                {% for file in files %}
+
+
+                <tr>
+
+
+                    <td>
+
+                        <div class="file-name">
+
+
+                            <div class="file-icon">
+
+
+                                {% if file.file_type and "image" in file.file_type %}
+
+                                    🖼️
+
+                                {% elif file.file_type and "pdf" in file.file_type %}
+
+                                    📕
+
+                                {% elif file.file_type and "text" in file.file_type %}
+
+                                    📄
+
+                                {% elif file.file_type and "video" in file.file_type %}
+
+                                    🎬
+
+                                {% elif file.file_type and "audio" in file.file_type %}
+
+                                    🎵
+
+                                {% else %}
+
+                                    📁
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                            {{ file.filename }}
+
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        {{ file.file_type or "File" }}
+
+                    </td>
+
+
+                    <td>
+
+
+                        {% if file.file_size %}
+
+
+                            {% if file.file_size >= 1048576 %}
+
+                                {{ "%.2f"|format(file.file_size / 1048576) }} MB
+
+                            {% else %}
+
+                                {{ "%.2f"|format(file.file_size / 1024) }} KB
+
+                            {% endif %}
+
+
+                        {% else %}
+
+                            Unknown
+
+                        {% endif %}
+
+
+                    </td>
+
+
+                    <td>
+
+
+                        {% if file.encrypted %}
+
+                            <span class="encrypted-badge">
+                                🔒 Encrypted
+                            </span>
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+
+                    </td>
+
+
+                    <td>
+
+
+                        {% if file.uploaded_at %}
+
+                            {{ file.uploaded_at.strftime("%d-%m-%Y %H:%M") }}
+
+                        {% else %}
+
+                            Unknown
+
+                        {% endif %}
+
+
+                    </td>
+
+
+                    <td>
+
+
+                        <a
+                            class="action download"
+                            href="/download/{{ file.id }}"
+                        >
+                            ↓ Download
+                        </a>
+
+
+                        <!-- Share -->
+
+                        {% if file.id in share_links %}
+
+
+                            <button
+                                class="action share"
+                                type="button"
+                                onclick="showShareLink('{{ file.id }}')"
+                            >
+                                🔗 Share
+                            </button>
+
+
+                            <form
+                                action="/unshare/{{ file.id }}"
+                                method="POST"
+                                style="display:inline;"
+                            >
+
+                                <button
+                                    class="action unshare"
+                                    type="submit"
+                                    onclick="return confirm('Stop sharing this file?');"
+                                >
+                                    🚫 Stop Sharing
+                                </button>
+
+                            </form>
+
+
+                            <div
+                                class="share-link"
+                                id="share-{{ file.id }}"
+                            >
+
+                                <input
+                                    type="text"
+                                    value="{{ share_links[file.id] }}"
+                                    id="link-{{ file.id }}"
+                                    readonly
+                                >
+
+
+                                <button
+                                    class="copy-btn"
+                                    type="button"
+                                    onclick="copyLink('{{ file.id }}')"
+                                >
+                                    📋 Copy Link
+                                </button>
+
+                            </div>
+
+
+                        {% else %}
+
+
+                            <form
+                                action="/share/{{ file.id }}"
+                                method="POST"
+                                style="display:inline;"
+                            >
+
+                                <button
+                                    class="action share"
+                                    type="submit"
+                                >
+                                    🔗 Share
+                                </button>
+
+                            </form>
+
+
+                        {% endif %}
+
+
+                        <a
+                            class="action delete"
+                            href="/delete/{{ file.id }}"
+                            onclick="return confirm('Delete this file?');"
+                        >
+                            🗑 Delete
+                        </a>
+
+
+                    </td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty">
+
+
+            <div class="empty-icon">
+                📂
+            </div>
+
+
+            <strong>
+                No files yet
+            </strong>
+
+
+            Upload your first file from the dashboard.
+
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    function searchFiles() {
+
+        let input = document.getElementById(
+            "fileSearch"
+        );
+
+        let search = input.value.toLowerCase();
+
+        let rows = document.querySelectorAll(
+            "#fileTable tr"
+        );
+
+
+        rows.forEach(function(row) {
+
+            let fileName = row.innerText.toLowerCase();
+
+
+            if (fileName.includes(search)) {
+
+                row.style.display = "";
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    function showShareLink(fileId) {
+
+        let box = document.getElementById(
+            "share-" + fileId
+        );
+
+
+        if (box.style.display === "block") {
+
+            box.style.display = "none";
+
+        } else {
+
+            box.style.display = "block";
+
+        }
+
+    }
+
+
+    function copyLink(fileId) {
+
+        let input = document.getElementById(
+            "link-" + fileId
+        );
+
+
+        input.select();
+
+        input.setSelectionRange(
+            0,
+            99999
+        );
+
+
+        navigator.clipboard.writeText(
+            input.value
+        );
+
+
+        alert(
+            "Share link copied!"
+        );
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

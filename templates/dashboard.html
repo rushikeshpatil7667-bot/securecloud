@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SecureCloud Dashboard</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            background: #080d18;
+
+            color: #e5e7eb;
+
+            min-height: 100vh;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 262px;
+
+            height: 100vh;
+
+            background: #0d1422;
+
+            border-right: 1px solid #1f2937;
+
+            padding: 28px 20px;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .logo-icon {
+
+            width: 46px;
+
+            height: 46px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            font-size: 23px;
+        }
+
+
+        .logo h2 {
+
+            color: white;
+
+            font-size: 18px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .logo span {
+
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+
+        .menu-title {
+
+            color: #475569;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin: 10px 12px;
+        }
+
+
+        .menu-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px 14px;
+
+            margin-bottom: 6px;
+
+            border-radius: 9px;
+
+            color: #94a3b8;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+
+        .menu-item:hover {
+
+            background: #172033;
+
+            color: white;
+        }
+
+
+        .menu-item.active {
+
+            background: #1d4ed8;
+
+            color: white;
+
+            box-shadow:
+                0 5px 15px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.15
+                );
+        }
+
+
+        /* Admin setup */
+
+        .admin-setup {
+
+            color: #fbbf24;
+        }
+
+
+        .admin-setup:hover {
+
+            color: #fcd34d;
+        }
+
+
+        /* Admin panel */
+
+        .admin-panel {
+
+            color: #4ade80;
+        }
+
+
+        .admin-panel:hover {
+
+            color: #86efac;
+        }
+
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+        }
+
+
+        .user-card {
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            background: #172033;
+
+            border: 1px solid #1f2937;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-weight: 600;
+        }
+
+
+        .user-info strong {
+
+            display: block;
+
+            color: white;
+
+            font-size: 13px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .user-info span {
+
+            color: #64748b;
+
+            font-size: 10px;
+        }
+
+
+        .logout {
+
+            display: block;
+
+            text-align: center;
+
+            padding: 11px;
+
+            border-radius: 9px;
+
+            color: #f87171;
+
+            background: #111827;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+
+        .logout:hover {
+
+            background: #2a1717;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+
+            margin-left: 262px;
+
+            padding: 35px 42px;
+
+            min-height: 100vh;
+        }
+
+
+        .topbar {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 30px;
+        }
+
+
+        .topbar h1 {
+
+            color: white;
+
+            font-size: 29px;
+
+            font-weight: 600;
+        }
+
+
+        .topbar p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+        }
+
+
+        .status {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 9px 14px;
+
+            border-radius: 20px;
+
+            background: #111827;
+
+            border: 1px solid #1f2937;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+
+        .status-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+        }
+
+
+        /* ================= STATS ================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 24px;
+        }
+
+
+        .stat-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #0d1422;
+
+            border: 1px solid #1f2937;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            min-height: 125px;
+        }
+
+
+        .stat-title {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .stat-value {
+
+            color: white;
+
+            font-size: 25px;
+
+            font-weight: 600;
+        }
+
+
+        .stat-icon {
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 20px;
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 10px;
+
+            background: #172554;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+
+        /* ================= UPLOAD ================= */
+
+        .upload-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(
+                        37,
+                        99,
+                        235,
+                        0.13
+                    ),
+                    rgba(
+                        6,
+                        182,
+                        212,
+                        0.04
+                    )
+                );
+
+            border: 1px dashed #2563eb;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            margin-bottom: 24px;
+        }
+
+
+        .upload-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            margin: 0 auto 13px;
+
+            border-radius: 14px;
+
+            background: #172554;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #60a5fa;
+
+            font-size: 23px;
+        }
+
+
+        .upload-box h2 {
+
+            color: white;
+
+            font-size: 18px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .upload-box p {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .upload-form {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+        }
+
+
+        .file-input {
+
+            max-width: 300px;
+
+            padding: 9px;
+
+            border-radius: 8px;
+
+            border: 1px solid #263449;
+
+            background: #0b1120;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+
+        .upload-btn {
+
+            padding: 10px 19px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .upload-btn:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+        }
+
+
+        .security-note {
+
+            display: inline-block;
+
+            margin-top: 13px;
+
+            padding: 5px 10px;
+
+            border-radius: 15px;
+
+            color: #4ade80;
+
+            background: #09251a;
+
+            border: 1px solid #14532d;
+
+            font-size: 9px;
+        }
+
+
+        /* ================= CONTENT ================= */
+
+        .content-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        .panel {
+
+            background: #0d1422;
+
+            border: 1px solid #1f2937;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+        }
+
+
+        .panel-header {
+
+            padding: 18px 20px;
+
+            border-bottom: 1px solid #1f2937;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .panel-header h2 {
+
+            color: white;
+
+            font-size: 14px;
+        }
+
+
+        .panel-header span {
+
+            color: #64748b;
+
+            font-size: 10px;
+        }
+
+
+        /* ================= FILE TABLE ================= */
+
+        .table-wrapper {
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+
+            padding: 13px 18px;
+
+            background: #0b1120;
+
+            color: #475569;
+
+            font-size: 9px;
+
+            text-align: left;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        td {
+
+            padding: 13px 18px;
+
+            border-top: 1px solid #172131;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+
+        tr:hover td {
+
+            background: #101a2a;
+        }
+
+
+        .file-name {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            color: #dbeafe;
+
+            font-weight: 500;
+        }
+
+
+        .file-icon {
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 7px;
+
+            background: #172033;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .action {
+
+            text-decoration: none;
+
+            margin-right: 9px;
+
+            font-size: 10px;
+        }
+
+
+        .download {
+
+            color: #38bdf8;
+        }
+
+
+        .delete {
+
+            color: #f87171;
+        }
+
+
+        .action:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================= ACTIVITY ================= */
+
+        .activity {
+
+            padding: 8px 18px;
+        }
+
+
+        .activity-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #172131;
+        }
+
+
+        .activity-item:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .activity-icon {
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 7px;
+
+            background: #172554;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 12px;
+        }
+
+
+        .activity-info strong {
+
+            display: block;
+
+            color: #d1d5db;
+
+            font-size: 10px;
+        }
+
+
+        .activity-info span {
+
+            display: block;
+
+            color: #475569;
+
+            font-size: 9px;
+
+            margin-top: 3px;
+        }
+
+
+        .empty {
+
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: #475569;
+
+            font-size: 11px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 1000px) {
+
+            .content-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+
+                width: 70px;
+
+                padding: 20px 10px;
+            }
+
+
+            .logo {
+
+                justify-content: center;
+            }
+
+
+            .logo h2,
+            .logo span,
+            .menu-title,
+            .menu-item span,
+            .user-info,
+            .logout {
+
+                display: none;
+            }
+
+
+            .menu-item {
+
+                justify-content: center;
+            }
+
+
+            .main {
+
+                margin-left: 70px;
+
+                padding: 25px 18px;
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .status {
+
+                display: none;
+            }
+
+
+            .upload-form {
+
+                flex-direction: column;
+            }
+
+
+            .file-input {
+
+                width: 100%;
+
+                max-width: none;
+            }
+
+
+            .upload-btn {
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+
+    <div class="logo">
+
+
+        <div class="logo-icon">
+            ☁
+        </div>
+
+
+        <div>
+
+            <h2>
+                SecureCloud
+            </h2>
+
+            <span>
+                Private Cloud Storage
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="menu-title">
+        Workspace
+    </div>
+
+
+    <a
+        href="/dashboard"
+        class="menu-item active"
+    >
+
+        📊
+
+        <span>
+            Dashboard
+        </span>
+
+    </a>
+
+
+    <a
+        href="/files"
+        class="menu-item"
+    >
+
+        📁
+
+        <span>
+            My Files
+        </span>
+
+    </a>
+
+
+    <!--
+        Admin Setup is shown only
+        while this account is not an admin.
+    -->
+
+    {% if current_user.role != "admin" %}
+
+    <a
+        href="/admin-setup"
+        class="menu-item admin-setup"
+    >
+
+        🔐
+
+        <span>
+            Admin Setup
+        </span>
+
+    </a>
+
+    {% endif %}
+
+
+    <!--
+        Admin Panel is shown only
+        to administrator accounts.
+    -->
+
+    {% if current_user.role == "admin" %}
+
+    <a
+        href="/admin"
+        class="menu-item admin-panel"
+    >
+
+        🛡️
+
+        <span>
+            Admin Panel
+        </span>
+
+    </a>
+
+    {% endif %}
+
+
+    <div class="menu-title">
+        Account
+    </div>
+
+
+    <a
+        href="/logout"
+        class="menu-item"
+    >
+
+        🚪
+
+        <span>
+            Logout
+        </span>
+
+    </a>
+
+
+    <div class="sidebar-bottom">
+
+
+        <div class="user-card">
+
+
+            <div class="avatar">
+
+                {{ username[0]|upper }}
+
+            </div>
+
+
+            <div class="user-info">
+
+
+                <strong>
+                    {{ username }}
+                </strong>
+
+
+                {% if current_user.role == "admin" %}
+
+                <span>
+                    Administrator
+                </span>
+
+                {% else %}
+
+                <span>
+                    Personal Account
+                </span>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+
+        <div>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Welcome back, {{ username }} 👋
+            </p>
+
+        </div>
+
+
+        <div class="status">
+
+            <div class="status-dot"></div>
+
+            AWS S3 Connected
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+
+            <div class="stat-title">
+                Total Files
+            </div>
+
+
+            <div class="stat-value">
+                {{ files|length }}
+            </div>
+
+
+            <div class="stat-icon">
+                📁
+            </div>
+
+
+        </div>
+
+
+        <div class="stat-card">
+
+
+            <div class="stat-title">
+                Storage Provider
+            </div>
+
+
+            <div class="stat-value">
+                AWS S3
+            </div>
+
+
+            <div class="stat-icon">
+                ☁️
+            </div>
+
+
+        </div>
+
+
+        <div class="stat-card">
+
+
+            <div class="stat-title">
+                File Protection
+            </div>
+
+
+            <div class="stat-value">
+                Encrypted
+            </div>
+
+
+            <div class="stat-icon">
+                🔒
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= UPLOAD ================= -->
+
+    <div class="upload-box">
+
+
+        <div class="upload-icon">
+            ⬆
+        </div>
+
+
+        <h2>
+            Upload a new file
+        </h2>
+
+
+        <p>
+            Upload your file securely to your private cloud storage
+        </p>
+
+
+        <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+            class="upload-form"
+        >
+
+
+            <input
+                class="file-input"
+                type="file"
+                name="files"
+                multiple
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="upload-btn"
+            >
+                Upload File
+            </button>
+
+
+        </form>
+
+
+        <div class="security-note">
+
+            🔒 Files are encrypted before cloud storage
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <div class="content-grid">
+
+
+        <!-- FILES -->
+
+        <div class="panel">
+
+
+            <div class="panel-header">
+
+
+                <h2>
+                    Your Files
+                </h2>
+
+
+                <span>
+                    {{ files|length }} files
+                </span>
+
+
+            </div>
+
+
+            {% if files %}
+
+
+            <div class="table-wrapper">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                File
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Size
+                            </th>
+
+                            <th>
+                                Security
+                            </th>
+
+                            <th>
+                                Uploaded
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                    {% for file in files %}
+
+
+                    <tr>
+
+
+                        <td>
+
+
+                            <div class="file-name">
+
+
+                                <div class="file-icon">
+                                    📄
+                                </div>
+
+
+                                {{ file.filename }}
+
+
+                            </div>
+
+
+                        </td>
+
+
+                        <td>
+
+                            {{ file.file_type or "File" }}
+
+                        </td>
+
+
+                        <td>
+
+
+                            {% if file.file_size %}
+
+                                {{ "%.2f"|format(
+                                    file.file_size / 1024
+                                ) }} KB
+
+                            {% else %}
+
+                                Unknown
+
+                            {% endif %}
+
+
+                        </td>
+
+
+                        <td>
+
+                            {% if file.encrypted %}
+
+                            🔒 Encrypted
+
+                            {% else %}
+
+                            Protected
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+
+                            {% if file.uploaded_at %}
+
+                            {{ file.uploaded_at.strftime(
+                                "%d-%m-%Y %H:%M"
+                            ) }}
+
+                            {% else %}
+
+                            Unknown
+
+                            {% endif %}
+
+
+                        </td>
+
+
+                        <td>
+
+
+                            <a
+                                href="/download/{{ file.id }}"
+                                class="action download"
+                            >
+                                Download
+                            </a>
+
+
+                            <a
+                                href="/delete/{{ file.id }}"
+                                class="action delete"
+                                onclick="return confirm('Delete this file?');"
+                            >
+                                Delete
+                            </a>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="empty">
+
+                📂
+
+                <br><br>
+
+                No files uploaded yet.
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- ACTIVITY -->
+
+        <div class="panel">
+
+
+            <div class="panel-header">
+
+
+                <h2>
+                    Recent Activity
+                </h2>
+
+
+                <span>
+                    Last 10
+                </span>
+
+
+            </div>
+
+
+            {% if logs %}
+
+
+            <div class="activity">
+
+
+                {% for log in logs %}
+
+
+                <div class="activity-item">
+
+
+                    <div class="activity-icon">
+
+
+                        {% if log.action == "UPLOAD" %}
+
+                        ⬆
+
+                        {% elif log.action == "DOWNLOAD" %}
+
+                        ⬇
+
+                        {% elif log.action == "DELETE" %}
+
+                        🗑
+
+                        {% elif log.action == "SHARE" %}
+
+                        🔗
+
+                        {% elif log.action == "UNSHARE" %}
+
+                        🔒
+
+                        {% else %}
+
+                        ⚡
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    <div class="activity-info">
+
+
+                        <strong>
+
+                            {{ log.action }}
+
+                            {% if log.filename %}
+
+                            · {{ log.filename }}
+
+                            {% endif %}
+
+                        </strong>
+
+
+                        <span>
+
+                            {{ log.timestamp.strftime(
+                                "%d-%m-%Y %H:%M:%S"
+                            ) }}
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="empty">
+
+                No recent activity.
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

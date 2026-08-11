@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Panel | SecureCloud</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            background: #0b1120;
+
+            color: #e5e7eb;
+
+            min-height: 100vh;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 250px;
+
+            height: 100vh;
+
+            background: #111827;
+
+            border-right: 1px solid #1f2937;
+
+            padding: 28px 20px;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .logo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            font-size: 21px;
+        }
+
+
+        .logo h2 {
+            color: white;
+
+            font-size: 18px;
+        }
+
+
+        .logo span {
+            color: #6b7280;
+
+            font-size: 11px;
+        }
+
+
+        .menu-title {
+            color: #6b7280;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            margin: 10px 12px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .menu-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 14px;
+
+            margin-bottom: 6px;
+
+            border-radius: 10px;
+
+            color: #9ca3af;
+
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+
+        .menu-item:hover {
+            background: #1f2937;
+
+            color: white;
+        }
+
+
+        .menu-item.active {
+            background: #1d4ed8;
+
+            color: white;
+        }
+
+
+        .logout {
+            color: #f87171;
+        }
+
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+
+        .user-card {
+            padding: 14px;
+
+            border-radius: 12px;
+
+            background: #1f2937;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        .user-info strong {
+            display: block;
+
+            color: white;
+
+            font-size: 14px;
+        }
+
+
+        .user-info span {
+            color: #4ade80;
+
+            font-size: 11px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+
+            padding: 35px 45px;
+        }
+
+
+        .topbar {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .topbar h1 {
+            color: white;
+
+            font-size: 28px;
+        }
+
+
+        .topbar p {
+            color: #6b7280;
+
+            font-size: 14px;
+
+            margin-top: 5px;
+        }
+
+
+        .admin-badge {
+            padding: 9px 14px;
+
+            border-radius: 20px;
+
+            color: #4ade80;
+
+            background: #0b2118;
+
+            border: 1px solid #14532d;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .stat-card {
+            background: #111827;
+
+            border: 1px solid #1f2937;
+
+            border-radius: 16px;
+
+            padding: 22px;
+        }
+
+
+        .stat-title {
+            color: #9ca3af;
+
+            font-size: 13px;
+        }
+
+
+        .stat-value {
+            color: white;
+
+            font-size: 27px;
+
+            font-weight: 600;
+
+            margin-top: 10px;
+        }
+
+
+        /* ================= PANELS ================= */
+
+        .panel {
+            background: #111827;
+
+            border: 1px solid #1f2937;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            margin-bottom: 25px;
+        }
+
+
+        .panel-header {
+            padding: 20px;
+
+            border-bottom: 1px solid #1f2937;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .panel-header h2 {
+            color: white;
+
+            font-size: 17px;
+        }
+
+
+        .panel-header span {
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+            color: #6b7280;
+
+            background: #0f172a;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            text-align: left;
+
+            padding: 14px 20px;
+        }
+
+
+        td {
+            padding: 15px 20px;
+
+            border-top: 1px solid #1f2937;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+        }
+
+
+        tr:hover td {
+            background: #151e2e;
+        }
+
+
+        .username {
+            color: white;
+
+            font-weight: 500;
+        }
+
+
+        .role {
+            display: inline-block;
+
+            padding: 4px 9px;
+
+            border-radius: 12px;
+
+            font-size: 10px;
+        }
+
+
+        .admin-role {
+            color: #4ade80;
+
+            background: #0b2b1d;
+
+            border: 1px solid #166534;
+        }
+
+
+        .user-role {
+            color: #60a5fa;
+
+            background: #172554;
+
+            border: 1px solid #1e3a8a;
+        }
+
+
+        /* ================= ACTIVITY ================= */
+
+        .activity-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px 20px;
+
+            border-bottom: 1px solid #1f2937;
+        }
+
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .activity-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 8px;
+
+            background: #172554;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .activity-info strong {
+            display: block;
+
+            color: #d1d5db;
+
+            font-size: 12px;
+        }
+
+
+        .activity-info span {
+            color: #6b7280;
+
+            font-size: 10px;
+        }
+
+
+        .empty {
+            padding: 35px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 70px;
+
+                padding: 20px 10px;
+            }
+
+
+            .logo h2,
+            .logo span,
+            .menu-title,
+            .menu-item span,
+            .user-info {
+                display: none;
+            }
+
+
+            .logo {
+                justify-content: center;
+            }
+
+
+            .menu-item {
+                justify-content: center;
+            }
+
+
+            .main {
+                margin-left: 70px;
+
+                padding: 25px 18px;
+            }
+
+
+            .admin-badge {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+
+    <div class="logo">
+
+
+        <div class="logo-icon">
+            ☁
+        </div>
+
+
+        <div>
+
+            <h2>
+                SecureCloud
+            </h2>
+
+            <span>
+                Cloud Storage
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="menu-title">
+        Workspace
+    </div>
+
+
+    <a
+        href="/dashboard"
+        class="menu-item"
+    >
+        📊
+        <span>
+            Dashboard
+        </span>
+    </a>
+
+
+    <a
+        href="/files"
+        class="menu-item"
+    >
+        📁
+        <span>
+            My Files
+        </span>
+    </a>
+
+
+    <a
+        href="/admin"
+        class="menu-item active"
+    >
+        🛡️
+        <span>
+            Admin Panel
+        </span>
+    </a>
+
+
+    <div class="menu-title">
+        Account
+    </div>
+
+
+    <a
+        href="/logout"
+        class="menu-item logout"
+    >
+        🚪
+        <span>
+            Logout
+        </span>
+    </a>
+
+
+    <div class="sidebar-bottom">
+
+
+        <div class="user-card">
+
+
+            <div class="avatar">
+                A
+            </div>
+
+
+            <div class="user-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Admin Account
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+
+    <div class="topbar">
+
+
+        <div>
+
+            <h1>
+                Admin Panel
+            </h1>
+
+            <p>
+                Manage users, files and system activity.
+            </p>
+
+        </div>
+
+
+        <div class="admin-badge">
+
+            🛡 Administrator Access
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-title">
+                Total Users
+            </div>
+
+            <div class="stat-value">
+                {{ users|length }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-title">
+                Total Files
+            </div>
+
+            <div class="stat-value">
+                {{ files|length }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-title">
+                Recent Activities
+            </div>
+
+            <div class="stat-value">
+                {{ logs|length }}
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= USERS ================= -->
+
+    <div class="panel">
+
+
+        <div class="panel-header">
+
+            <h2>
+                Registered Users
+            </h2>
+
+            <span>
+                {{ users|length }} users
+            </span>
+
+        </div>
+
+
+        {% if users %}
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Username
+                        </th>
+
+                        <th>
+                            Role
+                        </th>
+
+                        <th>
+                            Account ID
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% for user in users %}
+
+
+                <tr>
+
+
+                    <td class="username">
+
+                        {{ user.username }}
+
+                    </td>
+
+
+                    <td>
+
+
+                        {% if user.role == "admin" %}
+
+                        <span class="role admin-role">
+                            ADMIN
+                        </span>
+
+                        {% else %}
+
+                        <span class="role user-role">
+                            USER
+                        </span>
+
+                        {% endif %}
+
+
+                    </td>
+
+
+                    <td>
+
+                        #{{ user.id }}
+
+                    </td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty">
+
+            No users registered yet.
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- ================= FILES ================= -->
+
+    <div class="panel">
+
+
+        <div class="panel-header">
+
+            <h2>
+                All Stored Files
+            </h2>
+
+            <span>
+                {{ files|length }} files
+            </span>
+
+        </div>
+
+
+        {% if files %}
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            File
+                        </th>
+
+                        <th>
+                            Owner
+                        </th>
+
+                        <th>
+                            Uploaded
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% for file in files %}
+
+
+                <tr>
+
+
+                    <td class="username">
+
+                        📄 {{ file.filename }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{ file.owner.username }}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if file.uploaded_at %}
+
+                        {{ file.uploaded_at.strftime(
+                            "%d-%m-%Y %H:%M"
+                        ) }}
+
+                        {% else %}
+
+                        Unknown
+
+                        {% endif %}
+
+                    </td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty">
+
+            No files stored yet.
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- ================= ACTIVITY ================= -->
+
+    <div class="panel">
+
+
+        <div class="panel-header">
+
+            <h2>
+                System Activity
+            </h2>
+
+            <span>
+                Last 50 activities
+            </span>
+
+        </div>
+
+
+        {% if logs %}
+
+
+        {% for log in logs %}
+
+
+        <div class="activity-item">
+
+
+            <div class="activity-icon">
+                ⚡
+            </div>
+
+
+            <div class="activity-info">
+
+
+                <strong>
+
+                    {{ log.action }}
+
+                    {% if log.filename %}
+
+                    · {{ log.filename }}
+
+                    {% endif %}
+
+                </strong>
+
+
+                <span>
+
+                    User:
+                    {{ log.username }}
+
+                    ·
+
+                    {{ log.timestamp.strftime(
+                        "%d-%m-%Y %H:%M:%S"
+                    ) }}
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+        {% else %}
+
+
+        <div class="empty">
+
+            No activity recorded yet.
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Database
+*.db
+database.db
+
+# Encryption keys
+*.key
+secret.key
+
+# Local uploads
+uploads/
+
+# Flask instance data
+instance/
+
+# IDE files
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db

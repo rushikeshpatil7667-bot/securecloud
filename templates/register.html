@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | SecureCloud</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(37, 99, 235, 0.20),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 85% 85%,
+                    rgba(6, 182, 212, 0.12),
+                    transparent 32%
+                ),
+                #080d18;
+
+            color: #e5e7eb;
+        }
+
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+
+            background: #0d1422;
+
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+
+            padding: 38px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.45);
+
+            animation: appear 0.45s ease;
+        }
+
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* Logo */
+
+        .logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+
+            margin: 0 auto 14px;
+
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 31px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            box-shadow:
+                0 10px 30px rgba(37, 99, 235, 0.25);
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border-radius: 9px;
+
+            border: 1px solid #263449;
+
+            background: #080d18;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        input:hover {
+            border-color: #334155;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        input::placeholder {
+            color: #475569;
+        }
+
+
+        /* Password hint */
+
+        .password-hint {
+            margin-top: 6px;
+
+            color: #475569;
+
+            font-size: 10px;
+        }
+
+
+        /* Button */
+
+        button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            margin-top: 4px;
+
+            transition: 0.2s;
+
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, 0.18);
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.28);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+
+        /* Security information */
+
+        .security-box {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 22px;
+
+            padding: 11px 12px;
+
+            border-radius: 10px;
+
+            background: #0a1714;
+
+            border: 1px solid #143c31;
+        }
+
+        .security-icon {
+            width: 30px;
+            height: 30px;
+
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #0d2b22;
+
+            font-size: 13px;
+        }
+
+        .security-text strong {
+            display: block;
+
+            color: #86efac;
+
+            font-size: 11px;
+        }
+
+        .security-text span {
+            display: block;
+
+            color: #4b5563;
+
+            font-size: 9px;
+
+            margin-top: 2px;
+        }
+
+
+        /* Footer */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 23px;
+
+            padding-top: 19px;
+
+            border-top: 1px solid #1b2638;
+
+            font-size: 12px;
+
+            color: #64748b;
+        }
+
+        .footer a {
+            color: #38bdf8;
+
+            text-decoration: none;
+
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+
+        .bottom-note {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 16px;
+
+            color: #475569;
+
+            font-size: 10px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+
+            background: #22c55e;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 7px rgba(34, 197, 94, 0.5);
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 14px;
+            }
+
+            .container {
+                padding: 28px 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ☁
+        </div>
+
+        <h1>SecureCloud</h1>
+
+        <p>
+            Create your secure cloud account
+        </p>
+
+    </div>
+
+
+    <form action="/register" method="POST">
+
+
+        <div class="form-group">
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Choose a username"
+                autocomplete="username"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required
+            >
+
+            <div class="password-hint">
+                Use a strong password that you don't use elsewhere.
+            </div>
+
+        </div>
+
+
+        <button type="submit">
+            Create Account
+        </button>
+
+
+    </form>
+
+
+    <div class="security-box">
+
+        <div class="security-icon">
+            🔐
+        </div>
+
+        <div class="security-text">
+
+            <strong>
+                Secure account
+            </strong>
+
+            <span>
+                Your password is stored using secure hashing.
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+
+        Already have an account?
+
+        <a href="/login">
+            Sign in
+        </a>
+
+    </div>
+
+
+    <div class="bottom-note">
+
+        <div class="dot"></div>
+
+        SecureCloud protected environment
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
